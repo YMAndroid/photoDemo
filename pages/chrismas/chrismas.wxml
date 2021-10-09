@@ -1,0 +1,32 @@
+<!--pages/chrismas/chrismas.wxml-->
+<view class="container">
+<view wx:if="{{bgPic}}">
+    <view class="container" 
+          id="container"
+          bind:touchstart="touchStart" 
+          bind:touchend="touchEnd"
+          bind:touchmove="touchMove">
+    <image class="bg" src="{{bgPic}}"></image>
+    <icon type="cancel" class="cancel" id="cancel"
+            style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}"></icon>
+    <icon type="waiting" class="handle"  id="handle"  color="green"
+            style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}"></icon>
+    <image class="hat" id='hat' src="../../image/{{currentHatId}}.png"
+    style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"
+    ></image>
+    </view>
+</view>
+  <view class="emptyBg" wx:else></view>
+</view>
+<view class="btnContainer">
+  <button data-way="avatar" bind:tap="getAvatar" class="btn1">获取头像</button>
+  <button data-way="album" bind:tap="chooseImage" class="btn1">相册选择</button>
+</view>
+
+<scroll-view class="scrollView" scroll-x="true" >
+    <image class="imgList" 
+        wx:for="...imgList" wx:key="{{index+1}}" 
+        src="../../image/{{index+1}}.png"
+        data-hat-id="{{index+1}}"
+        bind:tap="chooseImg"></image>
+</scroll-view> 
