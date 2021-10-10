@@ -1,5 +1,5 @@
 <!--pages/chrismas/chrismas.wxml-->
-<view class="container">
+<view class="container" wx:if="{{!isSave}}">
 <view wx:if="{{bgPic}}">
     <view class="container" 
           id="container"
@@ -18,9 +18,15 @@
 </view>
   <view class="emptyBg" wx:else></view>
 </view>
+  <canvas wx:else class="myCanvas" canvas-id="myCanvas" style="height:300px;;width:100%;"/>
+
+
+
+
 <view class="btnContainer">
   <button data-way="avatar" bind:tap="getAvatar" class="btn1">获取头像</button>
-  <button data-way="album" bind:tap="chooseImage" class="btn1">相册选择</button>
+  <!-- <button data-way="album" bind:tap="chooseImage" class="btn1">相册选择</button> -->
+  <button bind:tap="savePic" class="btn1" >保存头像</button>
 </view>
 
 <scroll-view class="scrollView" scroll-x="true" >

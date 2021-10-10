@@ -84,5 +84,6 @@ page{
     border-radius:5px;
     margin: 0 auto;
     display: block;
+    border:1px solid rgb(235, 235, 245);
   }
   /* end */

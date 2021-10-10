@@ -1,5 +1,7 @@
 // pages/chrismas/chrismas.js
 const app = getApp();
+const pc = wx.createCanvasContext('myCanvas');
+const windowWidth = wx.getSystemInfoSync().windowWidth;
 Page({
 
     /**
@@ -13,7 +15,15 @@ Page({
         hat_center_x:0,
         currentHatId:1,
         picChoosed:false,
-        userInfo:null
+        userInfo:null,
+        hatCenterX:wx.getSystemInfoSync().windowWidth/2,
+    hatCenterY:150,
+    cancelCenterX:wx.getSystemInfoSync().windowWidth/2-50-2,
+    cancelCenterY:100,
+    handleCenterX:wx.getSystemInfoSync().windowWidth/2+50-2,
+    handleCenterY:200,
+    hatSize:100,
+    isSave: false,
     },
 
     /**
@@ -160,5 +170,73 @@ Page({
   },
   
 
+  chooseImg(e){
+    console.log(e);
+    this.setData({
+      currentHatId:e.target.dataset.hatId
+    })
+  },
+
+  savePic(e){
+    if(this.data.bgPic == null){
+      wx.showToast({
+        title: '请先获取头像！',
+      })
+      return;
+    } 
+    this.setData({
+      isSave: true
+    })
+
+    //初始化头像canvas
+    this.draw();
+  },
+
+
+  draw() {
+    wx.getImageInfo({
+      src:this.data.bgPic,
+      success: res => {
+        console.log("res.path：",res.path);
+          this.bgPic = res.path;
+          console.log("this.bgPic：",this.bgPic);
+          const hat_size = 100 * this.data.scale;
+          console.log("hat_size:",hat_size);
+          pc.clearRect(0, 0, windowWidth, 300);
+          console.log("windowWidth:",windowWidth);
+          pc.drawImage(this.bgPic, windowWidth / 2 - 150, 0, 300, 300);
+          pc.translate(this.data.hatCenterX,this.data.hatCenterY);
+          pc.rotate(this.data.rotate * Math.PI / 180);
+          pc.drawImage("../../images/" + this.data.currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+          pc.draw();
+
+
+          wx.canvasToTempFilePath({
+            x: windowWidth / 2 - 150,
+            y: 0,
+            height: 300,
+            width: 300,
+            canvasId: 'myCanvas',
+            success: (res) => {
+              wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success: (res) => {
+                  this.setData({
+                    isSave: false
+                  })
+                  wx.showToast({
+                    title: '图片已保存到相册，请前往微信去设置头像!',
+                  })
+                  console.log("success:" + res);
+                }, fail(e) {
+                  console.log("err:" + e);
+                }
+              })
+            }
+          });
+      }
+    })
+
+  },
 
 })

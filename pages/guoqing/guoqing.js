@@ -176,7 +176,7 @@ Page({
         filePath: that.data.prurl,
         success(res) {
           wx.showModal({
-            content: '图片已保存到相册，请前往微信去设置头像!',
+            content: '图片已保存到相册!',
             showCancel: false,
             success: function(res) {
               if (res.confirm) {
