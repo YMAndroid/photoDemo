@@ -1,9 +1,7 @@
 {
   "pages":[
     "pages/guoqing/guoqing",
-    "pages/chrismas/chrismas",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/chrismas/chrismas"
   ],
   "window":{
     "backgroundTextStyle":"light",

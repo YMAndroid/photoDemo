@@ -38,7 +38,6 @@ Page({
     // 初始化
     initCanvas(index){
       let that = this;
-      // console.log("Promise.all", res)
       //主要就是计算好各个图文的位置
       let num = 150;
       // ctx.drawImage(res[0].path, 0, 0, num, num)

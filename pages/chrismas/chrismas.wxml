@@ -1,4 +1,5 @@
 <!--pages/chrismas/chrismas.wxml-->
+
 <view class="container" wx:if="{{!isSave}}">
 <view wx:if="{{bgPic}}">
     <view class="container" 
