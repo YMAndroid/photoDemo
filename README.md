@@ -11,5 +11,10 @@
 3、
 
 2)制作圣诞头像效果图
-![image]()
+![image](https://github.com/YMAndroid/photoDemo/blob/main/images/%E5%9C%A3%E8%AF%9E.gif)
+
+
+## 最后
+感兴趣的小伙伴可以扫描小程序的二维码进行体验。
+
 
