@@ -1,0 +1,40 @@
+<!--pages/guoqing/guoqing.wxml-->
+<!-- 画布大小按需定制 这里我按照背景图的尺寸定的  -->
+<view style="margin-top:5px">
+  <image src="../../images/20190906-logo2.png" height="50px" class="header"></image>
+</view>
+
+<view class="canvas-view">
+
+<view style="width:250px;border:2px solid #ffffff;">
+  <canvas canvas-id="shareImg" style="width:250px;height: 250px;"></canvas>
+</view>
+  
+  
+<!-- 预览区域  -->
+</view>
+
+<view class='canvas-view-right'>  
+    <button bindtap="getUserProfile" class="btn1">获取头像</button>
+    <button bindtap="save" class="btn1" disabled="{{!hasUserInfo}}">保存头像</button>
+</view>
+
+<view class="hot-biz" style="width: 90%;margin: 0 auto;border-radius: 10px"> 
+  <view class="hot-top">
+    <view class="tx">
+      热门
+    </view>
+  </view>
+
+  <view class="hot-item-list">
+    <scroll-view scroll-x>
+      <view class="hot-biz-list" >
+        <view class="item" wx:for="{{list}}" wx:key="id">
+          <image bindtap='selectImg' data-id='{{item}}' data-src='../../images/hat{{item}}.png' src="../../images/hat{{item}}.png" mode='aspectFill'></image>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+

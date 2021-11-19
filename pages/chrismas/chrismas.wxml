@@ -19,7 +19,7 @@
 </view>
   <view class="emptyBg" wx:else></view>
 </view>
-  <canvas wx:else class="myCanvas" canvas-id="myCanvas" style="height:300px;;width:100%;"/>
+  <canvas wx:else class="myCanvas" canvas-id="myCanvas" style="height:300px;width:100%;"/>
 
 
 

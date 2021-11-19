@@ -1,32 +1,39 @@
 {
-  "pages":[
-    "pages/guoqing/guoqing",
-    "pages/chrismas/chrismas"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "头像制作",
-    "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "color": "#515151",
-    "selectedColor": "#d81e06",
-    "list": [
-      {
-        "pagePath": "pages/guoqing/guoqing",
-        "text": "国庆头像",
-        "iconPath": "images/guoqing_normal.png",
-        "selectedIconPath": "images/guoqing_press.png"
-      },
-      {
-        "pagePath": "pages/chrismas/chrismas",
-        "text": "圣诞头像",
-        "iconPath": "images/chrismas_normal.png",
-        "selectedIconPath": "images/chrismas_press.png"
-      }
-    ]
-  },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/companyanniversary/companyanniversary",
+        "pages/guoqing/guoqing",
+        "pages/chrismas/chrismas"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "头像制作",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#515151",
+        "selectedColor": "#d81e06",
+        "list": [
+            {
+                "pagePath": "pages/companyanniversary/companyanniversary",
+                "text": "周年庆",
+                "iconPath": "images/guoqing_normal.png",
+                "selectedIconPath": "images/guoqing_press.png"
+            },
+            {
+                "pagePath": "pages/guoqing/guoqing",
+                "text": "国庆头像",
+                "iconPath": "images/guoqing_normal.png",
+                "selectedIconPath": "images/guoqing_press.png"
+            },
+            {
+                "pagePath": "pages/chrismas/chrismas",
+                "text": "圣诞头像",
+                "iconPath": "images/chrismas_normal.png",
+                "selectedIconPath": "images/chrismas_press.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
 }
