@@ -11,6 +11,41 @@ page{
      width: 315px!important;
      height: 125px!important;
    }
+
+   .bg{
+    position: absolute;
+    z-index:0;
+    height: 250px;
+    width:250px;
+  }
+   .canver-view{
+     z-index: 5;
+    width:250px;
+    border:2px solid #ffffff;
+   }
+
+   .container{
+    width:250px;
+    height:250px;
+    display: flex;
+    justify-content: center;
+    border:2px solid #ffffff;
+  }
+
+  .hat{ 
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    border: dashed 2px yellow;
+    top:100px;
+  }
+
+  .handle,.cancel{
+    position: absolute;
+    z-index: 1;
+    width:20px;
+    height:20px;
+  }
  
    .canvas-view{
      width: 100%;
@@ -21,6 +56,7 @@ page{
      display: flex;
      justify-content: center;
      flex-direction: row;
+     z-index:0;
    }
  
    .canvas-view-right{

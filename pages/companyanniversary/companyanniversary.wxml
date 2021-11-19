@@ -4,15 +4,30 @@
   <image src="../../images/20190906-logo2.png" height="50px" class="header"></image>
 </view>
 
-<view class="canvas-view">
-
-<view style="width:250px;border:2px solid #ffffff;">
+<view wx:if="{{userInfo.avatarUrl && defaultImg > 2}}">
+    <view class="container" 
+          id="container"
+          bind:touchstart="touchStart" 
+          bind:touchend="touchEnd"
+          bind:touchmove="touchMove">
+    <image class="bg" src="{{userInfo.avatarUrl}}"></image>
+    <icon type="cancel" class="cancel" id="cancel"
+            style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}"></icon>
+    <icon type="waiting" class="handle"  id="handle"  color="green"
+            style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}"></icon>
+    <image class="hat" id='hat' src="../../images/hat{{defaultImg}}.png"
+    style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"
+    ></image>
+    </view>
+</view>
+<view wx:else>
+  <view class="canver-view" >
   <canvas canvas-id="shareImg" style="width:250px;height: 250px;"></canvas>
 </view>
-  
-  
-<!-- 预览区域  -->
+
 </view>
+
+
 
 <view class='canvas-view-right'>  
     <button bindtap="getUserProfile" class="btn1">获取头像</button>
