@@ -197,13 +197,9 @@ Page({
     wx.getImageInfo({
       src:this.data.bgPic,
       success: res => {
-        console.log("res.path：",res.path);
           this.bgPic = res.path;
-          console.log("this.bgPic：",this.bgPic);
           const hat_size = 100 * this.data.scale;
-          console.log("hat_size:",hat_size);
           pc.clearRect(0, 0, windowWidth, 300);
-          console.log("windowWidth:",windowWidth);
           pc.drawImage(this.bgPic, windowWidth / 2 - 150, 0, 300, 300);
           pc.translate(this.data.hatCenterX,this.data.hatCenterY);
           pc.rotate(this.data.rotate * Math.PI / 180);

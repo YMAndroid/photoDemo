@@ -4,7 +4,7 @@
   <image src="../../images/20190906-logo2.png" height="50px" class="header"></image>
 </view>
 
-<view class="hot-biz" style="width: 90%;margin: 0 auto;border-radius: 10px;margin-bottom:15px;"> 
+<view class="hot-biz" style="width: 80%;margin: 0 auto;border-radius: 10px;margin-bottom:15px;"> 
   <view class="hot-top">
     <view class="tx">
       热门
