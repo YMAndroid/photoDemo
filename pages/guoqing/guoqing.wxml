@@ -1,10 +1,11 @@
 <!--pages/guoqing/guoqing.wxml-->
 <!-- 画布大小按需定制 这里我按照背景图的尺寸定的  -->
-<view style="margin-top:60px;margin-bottom:40px">
+<ad unit-id="adunit-3229c0c5bf5f7101" ad-intervals="30"  bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+<!-- <view style="margin-top:60px;margin-bottom:40px">
   <image src="../../images/20190906-logo2.png" height="50px" class="header"></image>
-</view>
+</view> -->
 
-<view class="hot-biz" style="width: 90%;margin: 0 auto;border-radius: 10px;margin-bottom:15px;"> 
+<view class="hot-biz" style="width: 90%;border-radius: 10px;margin-bottom:15px;"> 
   <view class="hot-top">
     <view class="tx">
       热门

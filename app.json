@@ -1,7 +1,11 @@
 {
   "pages":[
+    "pages/splash/splash",
     "pages/guoqing/guoqing",
-    "pages/chrismas/chrismas"
+    "pages/chrismas/chrismas",
+    "pages/me/me",
+    "pages/me/picturehistory/picturehistory",
+    "pages/me/about/about"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -22,6 +26,12 @@
       {
         "pagePath": "pages/chrismas/chrismas",
         "text": "圣诞头像",
+        "iconPath": "images/chrismas_normal.png",
+        "selectedIconPath": "images/chrismas_press.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "个人中心",
         "iconPath": "images/chrismas_normal.png",
         "selectedIconPath": "images/chrismas_press.png"
       }

@@ -1,7 +1,8 @@
 // pages/guoqing/guoqing.js
 const ctx = wx.createCanvasContext('shareImg');
 const app = getApp();
-
+// 在页面中定义插屏广告
+let interstitialAd = null
 Page({
 
     /**
@@ -187,14 +188,48 @@ Page({
       })
     },
   
-  
+    adLoad() {
+      console.log('Banner 广告加载成功')
+    },
+    adError(err) {
+      console.log('Banner 广告加载失败', err)
+    },
+    adClose() {
+      console.log('Banner 广告关闭')
+    },
   
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      let that = this;
+      // setTimeout(function() {
+      //   that.advertise();
+      // },10000)
       this.initCanvas(this.data.defaultImg);
     },
+
+    advertise(){
+        
+      // 在页面onLoad回调事件中创建插屏广告实例
+      if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-5af1c3dd76e063af'
+      })
+      interstitialAd.onLoad(() => {})
+      interstitialAd.onError((err) => {})
+      interstitialAd.onClose(() => {
+          this.jumpToMain();
+      })
+    }
+    
+    // 在适合的场景显示插屏广告
+    if (interstitialAd) {
+      interstitialAd.show().catch((err) => {
+        console.error(err)
+      })
+    }
+      },
   
     /**
      * 用户点击右上角分享

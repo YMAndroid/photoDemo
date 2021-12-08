@@ -1,2 +1,16 @@
 /**app.wxss**/
 
+/* 横着的分割View样式 */
+/*分割线样式*/
+.div-line{
+    background: #F5F5F5;
+    width: 100%;
+    margin-left: 10rpx;
+    height: 3rpx;
+  }
+  
+  .div-line-higth{
+    background: #F5F5F5;
+    width: 100%;
+    height: 20rpx;
+  }
