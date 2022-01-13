@@ -1,11 +1,10 @@
 // pages/companyanniversary/companyanniversary.js
 // pages/guoqing/guoqing.js
-const ctx = wx.createCanvasContext('shareImg');
 const app = getApp();
 const windowWidth = wx.getSystemInfoSync().windowWidth;
 const windowHeight = wx.getSystemInfoSync().windowHeight;
 const pc = wx.createCanvasContext('myCanvas');
-const distense = 400 / 750 * wx.getSystemInfoSync().windowWidth;
+const distense = 380 / 750 * wx.getSystemInfoSync().windowWidth;
 const size = 260;
 Page({
 
@@ -13,14 +12,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-      
-      prurl: '',
       defaultImg: 0,
       userInfo: {},
       hasUserInfo: false,
-      list: [
-        0, 1, 2, 3, 4
-      ],
+      list: [0,1,2,3,4,5,6,7,8,9],
       scale:1,
       rotate:0,
       hat_center_x:0,
@@ -35,64 +30,34 @@ Page({
       hatSize:100,
       isSave:false,
       windowHeight:wx.getSystemInfoSync().windowHeight,
-      isAuthSavePhoto:false
+      isAuthSavePhoto:false,
+      hotArr:[{name:'2022虎年',key:'hunian'},{name:'国庆',key:'guoqing'},{name:'圣诞帽',key:'shendan'}],
+      curHot:0,
+    },
+
+    selectHot:function(e){
+      let index = e.currentTarget.dataset.index;
+      let tempList = [];
+      if(index == 0){
+        tempList = [0,1,2,3,4,6,6,7,8,9];
+      } else if(index == 1){
+        tempList = [0,1,2,3,4,5,6,7];
+      } else if(index == 2){
+        tempList = [0, 1, 2,3,4,5];
+      }
+      this.setData({
+        curHot:index,
+        list: tempList,
+        defaultImg: 0,
+      })
     },
   
     selectImg: function(e){
-      if(!this.data.userInfo.avatarUrl) {
-          wx.showToast({
-              icon:"none",
-            title: '请先获取头像!',
-          })
-          return;
-      }
       var current = e.target.dataset.id;
       console.log(current);
       this.setData({
         defaultImg: current,
-        prurl: ''
       });
-      //个性化头像
-      if(current > 2){
-          //this.draw();
-      } else {
-        //简易操作
-        if(this.data.userInfo.avatarUrl){
-            this.drawImg(this.data.userInfo.avatarUrl);
-          } else {
-            this.initCanvas(this.data.defaultImg);
-          }
-      }
-
-    },
-  
-    // 初始化
-    initCanvas(index){
-      let that = this;
-      //主要就是计算好各个图文的位置
-      // ctx.drawImage(res[0].path, 0, 0, num, num)
-      ctx.drawImage(`../../images/hat${index}.png`, 0, 0, size, size)
-      ctx.stroke()
-      ctx.draw(false, () => {
-        wx.canvasToTempFilePath({
-          x: 0,
-          y: 0,
-          width: size,
-          height: size,
-          destWidth: 960,
-          destHeight: 960,
-          canvasId: 'shareImg',
-          success: function(res) {
-            that.setData({
-              prurl: res.tempFilePath
-            })
-            // wx.hideLoading()
-          },
-          fail: function(res) {
-            wx.hideLoading()
-          }
-        })
-      })
     },
   
   
@@ -117,25 +82,22 @@ Page({
               userInfo: res.userInfo,
               hasUserInfo: true
             })
-
-            that.drawImg(res.userInfo.avatarUrl);
             app.globalData.userInfo = res.userInfo;
           }
         });
-      }else if(that.data.userInfo.avatarUrl){
-        console.log('-- 2 --');
-        that.drawImg(that.data.userInfo.avatarUrl);
       }
-  
     },   
   
-    drawImg(avatarUrl){
+    drawImg(){
+      wx.showLoading({
+        title: '生成头像中...',
+      })
       let that = this;
+      let type = this.data.hotArr[this.data.curHot].key;
       console.log("-- drawImg --");
-      // `${that.data.userInfo.avatarUrl}`
       let promise1 = new Promise(function(resolve, reject) {
         wx.getImageInfo({
-          src: avatarUrl,
+          src: that.data.userInfo.avatarUrl,
           success: function(res) {
             console.log("promise1", res)
             resolve(res);
@@ -143,11 +105,9 @@ Page({
         })
       });
       var index = that.data.defaultImg;
-      // ../../images/head${index}.png
-      // hat0.png  avg.jpg
       let promise2 = new Promise(function(resolve, reject) {
         wx.getImageInfo({
-          src: `../../images/hat${index}.png`,
+          src: `../../images/${type}/hat${index}.png`,
           success: function(res) {
             console.log(res)
             resolve(res);
@@ -159,29 +119,12 @@ Page({
       ]).then(res => {
         console.log("Promise.all", res)
         //主要就是计算好各个图文的位置
-       
-        ctx.drawImage(res[0].path, 0, 0, size, size)
-        ctx.drawImage('../../' + res[1].path, 0, 0, size, size)
-        ctx.stroke()
-        ctx.draw(false, () => {
-          wx.canvasToTempFilePath({
-            x: 0,
-            y: 0,
-            width: size,
-            height: size,
-            destWidth: 960,
-            destHeight: 960,
-            canvasId: 'shareImg',
-            success: function(res) {
-              that.setData({
-                prurl: res.tempFilePath
-              })
-              // wx.hideLoading()
-            },
-            fail: function(res) {
-              wx.hideLoading()
-            }
-          })
+        pc.clearRect(0, 0, windowWidth, size);
+        pc.drawImage(res[0].path, windowWidth/2-130, 0, size, size)
+        pc.drawImage('../../' + res[1].path, windowWidth/2-130, 0, size, size)
+        pc.stroke()
+        pc.draw(false, () => {
+          this.canvasToTempFile();
         })
       })
     },
@@ -289,7 +232,7 @@ Page({
     })
   },
 
-    // 获取用户已经授予了哪些权限
+  // 获取用户已经授予了哪些权限
   getSetting() {
     return new Promise((resolve, reject) => {
       wx.getSetting({
@@ -301,32 +244,13 @@ Page({
   },
 
     saveImage(){
-      var that = this;
-      if(this.data.defaultImg > 2){
-        this.setData({
-          isSave: true
-        })
+      this.setData({
+        isSave: true
+      })
+      if(this.data.curHot != 2){
+        this.drawImg();
+      } else{
         this.draw();
-      } else {
-        wx.saveImageToPhotosAlbum({
-          filePath: that.data.prurl,
-          success(res) {
-            wx.showModal({
-              content: '图片已保存到相册，请前往微信去设置哟!',
-              showCancel: false,
-              success: function(res) {
-                if (res.confirm) {
-                  console.log('用户点击确定');
-                }
-              }
-            })
-          }, 
-          fail(res){
-            wx.showToast({
-              title: '拒绝访问相册，无法保存头像！',
-            })
-          }
-        })
       }
     },
 
@@ -334,7 +258,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      this.initCanvas(this.data.defaultImg);
     },
   
     /**
@@ -371,6 +294,7 @@ Page({
     this.start_y=0;
   },
   touchStart(e){
+    if(this.data.curHot != 2) return;
     console.log("e:",e);
     if(e.target.id=="hat"){
       this.touch_target="hat";
@@ -386,6 +310,7 @@ Page({
     }
   },
   touchEnd(e){
+    if(this.data.curHot != 2) return;
       this.hat_center_x=this.data.hatCenterX;
       this.hat_center_y=this.data.hatCenterY;
       this.cancel_center_x=this.data.cancelCenterX;
@@ -398,6 +323,7 @@ Page({
     this.rotate=this.data.rotate;
   },
   touchMove(e){
+    if(this.data.curHot != 2) return;
     console.log("移动e:",e," ; this.startX,",this.start_x);
       var current_x=e.touches[0].clientX;
       var current_y=e.touches[0].clientY;
@@ -437,9 +363,9 @@ Page({
       this.start_x=current_x;
       this.start_y=current_y;
   },
-
-    
+  
   draw() {
+    let type = this.data.hotArr[this.data.curHot].key;
     wx.showLoading({
       title: '生成头像中...',
     })
@@ -453,44 +379,46 @@ Page({
           pc.translate(this.data.hatCenterX,this.data.hatCenterY-distense);
           pc.rotate(this.data.rotate * Math.PI / 180);
           
-          pc.drawImage(`../../images/hat${this.data.defaultImg}.png`, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+          pc.drawImage(`../../images/${type}/hat${this.data.defaultImg}.png`, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
                     
           pc.draw(false,()=>{
-            wx.canvasToTempFilePath({
-              x: windowWidth/2-130,
-              y: 0,
-              height: size,
-              width: size,
-              canvasId: 'myCanvas',
-              success: (res) => {
-                wx.saveImageToPhotosAlbum({
-                  filePath: res.tempFilePath,
-                  success: (res) => {
-                    this.setData({
-                      isSave: false
-                    })
-                    wx.hideLoading();
-                    wx.showModal({
-                      content: '图片已保存到相册,请前往微信去设置哟!',
-                      showCancel: false,
-                      success: function(res) {
-                        if (res.confirm) {
-                          console.log('用户点击确定');
-                        }
-                      }
-                    })
-                    console.log("success:" + res);
-                  }, fail(e) {
-                    wx.hideLoading();
-                    console.log("err:" + e);
-                  }
-                })
-              }
-            });
+            this.canvasToTempFile();
           });
       }
     })
+  },
 
-
+  canvasToTempFile(){
+    wx.canvasToTempFilePath({
+      x: windowWidth/2-130,
+      y: 0,
+      height: size,
+      width: size,
+      canvasId: 'myCanvas',
+      success: (res) => {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: (res) => {
+            this.setData({
+              isSave: false
+            })
+            wx.hideLoading();
+            wx.showModal({
+              content: '图片已保存到相册,请前往微信去设置哟!',
+              showCancel: false,
+              success: function(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定');
+                }
+              }
+            })
+            console.log("success:" + res);
+          }, fail(e) {
+            wx.hideLoading();
+            console.log("err:" + e);
+          }
+        })
+      }
+    });
   },
   })
