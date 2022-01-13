@@ -1,7 +1,11 @@
 <!--pages/guoqing/guoqing.wxml-->
+
 <view class="pagecontainer" >
   <image class="background-image"   src="/images/img-bag.png"></image>
-  <view style="width: 100%;height:300rpx;opacity:1"></view>
+  <view style="width: 100%;height: 300rpx;">
+    <ad unit-id="adunit-3229c0c5bf5f7101"  ad-intervals="30"></ad>
+  </view>
+  <view style="width: 100%;height:300rpx;opacity:1" wx:if="{{isShow}}"></view>
 
   <view class="contentwrap" style="width: 100%;height: 50rpx;">
         <view class="newtext">
@@ -54,7 +58,7 @@
   </view>
 
   <view class="hot-item-list">
-    <scroll-view scroll-x style="height: 52px;" wx:if="{{list.length > 0}}">
+    <scroll-view scroll-x style="height: 55px;" wx:if="{{list.length > 0}}">
       <view class="hot-biz-list"  >
         <view class="item" wx:for="{{list}}" wx:key="id">
           <image bindtap='selectImg' data-id='{{item}}' class="{{defaultImg == index ? 'image-select' : 'image-default'}}" data-src='../../images/{{hotArr[curHot].key}}/hat{{item}}.png' src="../../images/{{hotArr[curHot].key}}/hat{{item}}.png" mode='aspectFill'></image>
@@ -66,3 +70,4 @@
   </view>
 </view>
 </view>
+

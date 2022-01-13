@@ -33,6 +33,7 @@ Page({
       isAuthSavePhoto:false,
       hotArr:[{name:'2022虎年',key:'hunian'},{name:'国庆',key:'guoqing'},{name:'圣诞帽',key:'shendan'}],
       curHot:0,
+      isShow:false
     },
 
     selectHot:function(e){
@@ -421,4 +422,18 @@ Page({
       }
     });
   },
+
+  //添加广告位事件监听
+  adLoad() {
+    console.log('Banner 广告加载成功')
+  },
+  adError(err) {
+    console.log('Banner 广告加载失败', err)
+  },
+  adClose() {
+    console.log('Banner 广告关闭');
+    this.setData({
+      isShow:true
+    })
+  }
   })
