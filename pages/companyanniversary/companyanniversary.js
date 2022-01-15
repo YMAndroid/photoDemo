@@ -4,8 +4,9 @@ const app = getApp();
 const windowWidth = wx.getSystemInfoSync().windowWidth;
 const windowHeight = wx.getSystemInfoSync().windowHeight;
 const pc = wx.createCanvasContext('myCanvas');
-const distense = 380 / 750 * wx.getSystemInfoSync().windowWidth;
+const distense = 350 / 750 * wx.getSystemInfoSync().windowWidth;
 const size = 260;
+const moveIndex = 1;
 Page({
 
     /**
@@ -31,7 +32,7 @@ Page({
       isSave:false,
       windowHeight:wx.getSystemInfoSync().windowHeight,
       isAuthSavePhoto:false,
-      hotArr:[{name:'2022虎年',key:'hunian'},{name:'国庆',key:'guoqing'},{name:'圣诞帽',key:'shendan'}],
+      hotArr:[{name:'虎年相框',key:'hunian'},{name:'虎头帽子',key:'shendan'},{name:'国旗',key:'guoqing'}],
       curHot:0,
       isShow:false
     },
@@ -42,9 +43,9 @@ Page({
       if(index == 0){
         tempList = [0,1,2,3,4,6,6,7,8,9];
       } else if(index == 1){
-        tempList = [0,1,2,3,4,5,6,7];
+        tempList = [0,1,2,3,4,5,6];
       } else if(index == 2){
-        tempList = [0, 1, 2,3,4,5];
+        tempList = [0,1,2,3,4,5,6,7];
       }
       this.setData({
         curHot:index,
@@ -248,7 +249,7 @@ Page({
       this.setData({
         isSave: true
       })
-      if(this.data.curHot != 2){
+      if(this.data.curHot != moveIndex){
         this.drawImg();
       } else{
         this.draw();
@@ -295,7 +296,7 @@ Page({
     this.start_y=0;
   },
   touchStart(e){
-    if(this.data.curHot != 2) return;
+    if(this.data.curHot != moveIndex) return;
     console.log("e:",e);
     if(e.target.id=="hat"){
       this.touch_target="hat";
@@ -311,7 +312,7 @@ Page({
     }
   },
   touchEnd(e){
-    if(this.data.curHot != 2) return;
+    if(this.data.curHot != moveIndex) return;
       this.hat_center_x=this.data.hatCenterX;
       this.hat_center_y=this.data.hatCenterY;
       this.cancel_center_x=this.data.cancelCenterX;
@@ -324,7 +325,7 @@ Page({
     this.rotate=this.data.rotate;
   },
   touchMove(e){
-    if(this.data.curHot != 2) return;
+    if(this.data.curHot != moveIndex) return;
     console.log("移动e:",e," ; this.startX,",this.start_x);
       var current_x=e.touches[0].clientX;
       var current_y=e.touches[0].clientY;

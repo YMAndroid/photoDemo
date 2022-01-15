@@ -27,15 +27,15 @@
           bind:touchend="touchEnd"
           bind:touchmove="touchMove">
     <image class="bg" src="{{userInfo.avatarUrl}}"></image>
-    <icon wx:if="{{curHot == 2}}" type="cancel" class="cancel" id="cancel"
+    <icon wx:if="{{curHot == 1}}" type="cancel" class="cancel" id="cancel"
             style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}"></icon>
-    <icon wx:if="{{curHot == 2}}" type="waiting" class="handle"  id="handle"  color="green"
+    <icon wx:if="{{curHot == 1}}" type="waiting" class="handle"  id="handle"  color="green"
             style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}"></icon>
-    <image wx:if="{{curHot == 2}}" class="hat" id='hat' src="../../images/{{hotArr[curHot].key}}/hat{{defaultImg}}.png"
+    <image wx:if="{{curHot == 1}}" class="hat" id='hat' src="../../images/{{hotArr[curHot].key}}/hat{{defaultImg}}.png"
     style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"
     ></image>
 
-    <image class="hat-other" wx:if="{{curHot != 2}}" id='hat' src="../../images/{{hotArr[curHot].key}}/hat{{defaultImg}}.png"
+    <image class="hat-other" wx:if="{{curHot != 1}}" id='hat' src="../../images/{{hotArr[curHot].key}}/hat{{defaultImg}}.png"
     ></image>
     </view>
     <canvas wx:else class="myCanvas" canvas-id="myCanvas" style="height:260px;width:100%;"/>
