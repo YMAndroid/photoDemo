@@ -2,10 +2,7 @@
 
 <view class="pagecontainer" >
   <image class="background-image"   src="/images/img-bag.png"></image>
-  <view style="width: 100%;height: 300rpx;">
-    <ad unit-id="adunit-3229c0c5bf5f7101"  ad-intervals="30"></ad>
-  </view>
-  <view style="width: 100%;height:300rpx;opacity:1" wx:if="{{isShow}}"></view>
+  <view style="width: 100%;height:250rpx;opacity:1"></view>
 
   <view class="contentwrap" style="width: 100%;height: 50rpx;">
         <view class="newtext">
@@ -43,6 +40,7 @@
 
 
 <view class='canvas-view-right'>  
+    <button bindtap="handleShare" class="btn1" style="background-color: #4CA9E7;" open-type="share">分享好友</button>
     <button bindtap="getUserProfile" class="btn1">获取头像</button>
     <button wx:if="{{!isAuthSavePhoto}}" bindtap="save" class="btn1" style="background-color: #e49d1a;">保存头像</button>
     <button wx:else bindtap="showModal" class="btn1" style="background-color: #e49d1a;">保存头像</button>
@@ -69,5 +67,6 @@
     <view class="no-data"  wx:else>暂无数据</view>
   </view>
 </view>
+<ad unit-id="adunit-3229c0c5bf5f7101"  ad-intervals="30"></ad>
 </view>
 

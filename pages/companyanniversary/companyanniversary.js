@@ -4,7 +4,7 @@ const app = getApp();
 const windowWidth = wx.getSystemInfoSync().windowWidth;
 const windowHeight = wx.getSystemInfoSync().windowHeight;
 const pc = wx.createCanvasContext('myCanvas');
-const distense = 350 / 750 * wx.getSystemInfoSync().windowWidth;
+const distense = 300 / 750 * wx.getSystemInfoSync().windowWidth;
 const size = 260;
 const moveIndex = 1;
 Page({
@@ -132,7 +132,7 @@ Page({
     },
   
     handleShare: function(){
-      console.log('handleShare method');
+      console.log("分享");
       this.onShareAppMessage();
     },
   
@@ -267,7 +267,7 @@ Page({
      */
     onShareAppMessage: function () {
       return {
-        title: '领取你的周年庆专属头像',
+        title: '免费制作你的虎年专属头像',
         success: function (res) {
           // 转发成功
           console.log("转发成功:" + JSON.stringify(res));
@@ -400,7 +400,11 @@ Page({
       success: (res) => {
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
-          success: (res) => {
+          success: result => {
+            //保存地址
+            const records = wx.getStorageSync('records') || []
+            records.unshift(res.tempFilePath)
+            wx.setStorageSync('records', records)
             this.setData({
               isSave: false
             })
@@ -414,7 +418,6 @@ Page({
                 }
               }
             })
-            console.log("success:" + res);
           }, fail(e) {
             wx.hideLoading();
             console.log("err:" + e);

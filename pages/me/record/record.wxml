@@ -1,0 +1,10 @@
+<!--pages/me/record/record.wxml-->
+<view class="record-page">
+
+    <view wx:if="{{records.length <=0}}" class="no-data" bindtap="jumpToHome">
+        暂无数据，点击跳转到首页去制作头像！
+    </view>
+    <view  class="item" style="width:{{windowWidth/3}}px;height: {{windowWidth/3}}px;" wx:for="{{records}}">
+        <image src="{{item}}" style="width: 95%;height: 95%;padding: 5rpx;" bindtap="viewPicture" data-index="{{index}}"></image>
+    </view>
+</view>

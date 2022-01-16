@@ -1,0 +1,18 @@
+<!--pages/me/me.wxml-->
+<view class="me-page">
+    <view class="item" bindtap="jumpRecords">
+        <text>头像生成记录</text>
+        <text style="color: rgb(214, 218, 221);">></text>
+    </view>
+    <view class="other">
+        <text >关于作者</text>
+
+        <view class="info">
+            <view style="color: rgb(152, 153, 153);">微信号:</view>
+            <view style="margin-left: 20rpx;font-size: 32rpx;">{{info}}</view>
+            <image bindtap="copyInfo" style="width: 50rpx;height: 50rpx;margin-left: 40rpx;" src="/images/copy.png"></image>
+        </view>
+
+        <text>使用过程中有任何问题欢迎反馈！</text>
+    </view>
+</view>
