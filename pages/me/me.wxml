@@ -15,4 +15,8 @@
 
         <text>使用过程中有任何问题欢迎反馈！</text>
     </view>
+
+    <view class="video-ad" style="margin-top: 20rpx;">
+        <ad unit-id="adunit-37cd821efe7a27af" ad-type="video" ad-theme="white"></ad>
+    </view>
 </view>

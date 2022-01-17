@@ -67,6 +67,6 @@
     <view class="no-data"  wx:else>暂无数据</view>
   </view>
 </view>
-<ad unit-id="adunit-3229c0c5bf5f7101"  ad-intervals="30"></ad>
+<!-- <ad unit-id="adunit-3229c0c5bf5f7101"  ad-intervals="30"></ad> -->
 </view>
 

@@ -7,6 +7,8 @@ const pc = wx.createCanvasContext('myCanvas');
 const distense = 300 / 750 * wx.getSystemInfoSync().windowWidth;
 const size = 260;
 const moveIndex = 1;
+// 在页面中定义激励视频广告
+let videoAd = null;
 Page({
 
     /**
@@ -144,7 +146,22 @@ Page({
         })
         return;
       }
-      //this.saveImage();
+      if( wx.getStorageSync('count') == 0){
+                //弹出提示，观看视频解锁新的生成次数
+                wx.showModal({
+                  title: '提示',
+                  content: '头像制作机会已用完，观看视频可以重新解锁头像制作的次数?',
+                  success: res=> {
+                    if (res.confirm) {
+                      console.log('用户点击确定');
+                      this.showVideoAd();
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
+                })
+        return;
+      } 
       this.saveAuthCheck();
     },
   
@@ -248,7 +265,7 @@ Page({
     saveImage(){
       this.setData({
         isSave: true
-      })
+      });
       if(this.data.curHot != moveIndex){
         this.drawImg();
       } else{
@@ -260,6 +277,54 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.createAdInst();
+    },
+
+    //创建广告位实例
+    createAdInst(){
+      // 在页面onLoad回调事件中创建激励视频广告实例
+      if (wx.createRewardedVideoAd) {
+          videoAd = wx.createRewardedVideoAd({
+          adUnitId: 'adunit-bbc03f34108eedcf'
+        })
+      videoAd.onLoad(() => {
+        console.log("videoAd onload");
+      })
+      videoAd.onError((err) => {
+        console.log("videoAd onError:",err);
+      })
+      videoAd.onClose((res) => {
+        console.log("videoAd onClose:",res);
+        if (res && res.isEnded) {
+          //增加激励
+          wx.showToast({
+            icon:"none",
+            title: '成功获取5次生成头像次数!',
+          })
+          wx.setStorageSync("count",5);
+        } else {
+          //不增加激励
+          wx.showToast({
+            icon:"none",
+            title: '获取头像生成次数失败!',
+          })
+        }
+      })
+    }
+    },
+
+    showVideoAd(){
+      // 用户触发广告后，显示激励视频广告
+      if (videoAd) {
+        videoAd.show().catch(() => {
+        // 失败重试
+        videoAd.load()
+          .then(() => videoAd.show())
+          .catch(err => {
+            console.log('激励视频 广告显示失败')
+          })
+      })
+      }   
     },
   
     /**
@@ -402,9 +467,11 @@ Page({
           filePath: res.tempFilePath,
           success: result => {
             //保存地址
-            const records = wx.getStorageSync('records') || []
+            const records = wx.getStorageSync('records') || [];
             records.unshift(res.tempFilePath)
-            wx.setStorageSync('records', records)
+            wx.setStorageSync('records', records);
+            let count = wx.getStorageSync('count');
+            wx.setStorageSync('count',count -1 );
             this.setData({
               isSave: false
             })
