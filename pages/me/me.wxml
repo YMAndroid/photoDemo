@@ -10,7 +10,11 @@
         <view class="info">
             <view style="color: rgb(152, 153, 153);">微信号:</view>
             <view style="margin-left: 20rpx;font-size: 32rpx;">{{info}}</view>
-            <image bindtap="copyInfo" style="width: 50rpx;height: 50rpx;margin-left: 40rpx;" src="/images/copy.png"></image>
+            <view bindtap="copyInfo" style="margin-left: 40rpx;display: flex;flex-direction: row;align-items: center;">
+                <image  style="width: 50rpx;height: 50rpx;" src="/images/copy.png"></image>
+                <view style="color: rgb(152, 153, 153);">复制</view>
+            </view>
+           
         </view>
 
         <text>使用过程中有任何问题欢迎反馈！</text>

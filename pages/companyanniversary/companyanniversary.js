@@ -71,7 +71,6 @@ Page({
       console.log(e);
       let that = this;
       if(!that.data.userInfo.avatarUrl){
-        console.log('-- 1 --');
         wx.getUserProfile({
           desc: '仅用于生成头像使用', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
           success: (res) => {
@@ -86,7 +85,6 @@ Page({
               userInfo: res.userInfo,
               hasUserInfo: true
             })
-            app.globalData.userInfo = res.userInfo;
           }
         });
       }
@@ -150,7 +148,7 @@ Page({
                 //弹出提示，观看视频解锁新的生成次数
                 wx.showModal({
                   title: '提示',
-                  content: '头像制作机会已用完，观看视频可以重新解锁头像制作的次数?',
+                  content: '头像制作3次机会已用完，观看视频可重新解锁！',
                   success: res=> {
                     if (res.confirm) {
                       console.log('用户点击确定');
