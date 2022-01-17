@@ -299,9 +299,9 @@ Page({
           //增加激励
           wx.showToast({
             icon:"none",
-            title: '成功获取5次生成头像次数!',
+            title: '成功获取3次生成头像次数!',
           })
-          wx.setStorageSync("count",5);
+          wx.setStorageSync("count",3);
         } else {
           //不增加激励
           wx.showToast({

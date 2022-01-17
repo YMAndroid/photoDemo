@@ -4,7 +4,7 @@ App({
     let first = wx.getStorageSync('isFirst');
     if(!first){
       wx.setStorageSync("isFirst",true);
-      wx.setStorageSync("count",5);
+      wx.setStorageSync("count",3);
     }
   },
   globalData: {
