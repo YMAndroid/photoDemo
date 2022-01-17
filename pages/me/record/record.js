@@ -14,8 +14,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+          records: wx.getStorageSync('records') || []
+        })
         this.processAd();
-        
     },
 
     processAd(){
@@ -35,9 +37,6 @@ Page({
             })
             interstitialAd.onClose((res) => {
               console.log('onClose event emit', res);
-              this.setData({
-                records: wx.getStorageSync('records') || []
-            })
             })
           }
     },
